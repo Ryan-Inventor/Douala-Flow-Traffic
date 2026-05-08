@@ -1,7 +1,5 @@
 # 🚦 DoualaFlow — Système Big Data de Surveillance du Trafic Routier
 
-> **Mini-projet de TD** — Cours de Systèmes de Fichiers Big Data  
-> IUT Génie Informatique — Master 1  
 > Contexte : Surveillance intelligente du trafic à Douala, Cameroun
 
 ---
