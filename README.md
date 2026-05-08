@@ -209,5 +209,3 @@ flask-cors>=4.0.0     # Cross-Origin Resource Sharing
 ```
 
 ---
-
-*Projet réalisé dans le cadre du cours de Systèmes de Fichiers Big Data — IUT Génie Informatique, Master 1*
