@@ -1,0 +1,30 @@
+# ==============================================================================
+# DOUALAFLOW — Dépendances Python
+# ==============================================================================
+# Installer toutes les dépendances avec :
+#     pip install -r requirements.txt
+# ==============================================================================
+
+# --- COUCHE BIG DATA & TRAITEMENT ---
+# Pandas : Manipulation et analyse des DataFrames (équivalent SQL en Python)
+pandas>=2.0.0
+
+# PyArrow : Moteur de lecture/écriture du format Apache Parquet (Big Data)
+pyarrow>=12.0.0
+
+# NumPy : Calculs numériques vectorisés (utilisé par Pandas en coulisses)
+numpy>=1.24.0
+
+# --- COUCHE INTELLIGENCE ARTIFICIELLE ---
+# Scikit-learn : Bibliothèque de Machine Learning (notre modèle RandomForest)
+scikit-learn>=1.3.0
+
+# Joblib : Sérialisation du modèle entraîné (sauvegarder et recharger le modèle)
+joblib>=1.3.0
+
+# --- COUCHE SERVEUR API ---
+# Flask : Micro-framework web pour servir l'API et le frontend
+Flask>=3.0.0
+
+# Flask-CORS : Permet au navigateur d'appeler l'API Flask sans erreur de sécurité
+flask-cors>=4.0.0

@@ -1,0 +1,228 @@
+{
+  "timestamp": "2026-05-06T17:25:52.693657",
+  "current_hour": 17,
+  "axes": {
+    "akwa": {
+      "label": "Akwa",
+      "zone": "Centre-Ville & Affaires",
+      "congestion": 100.0,
+      "speed_kmh": 5.0,
+      "vehicle_count": 476,
+      "status": "SATURÉ",
+      "color": "#ef4444",
+      "coords": [
+        [
+          4.0487,
+          9.7012
+        ],
+        [
+          4.05,
+          9.703
+        ],
+        [
+          4.0515,
+          9.7048
+        ],
+        [
+          4.0528,
+          9.7063
+        ],
+        [
+          4.054,
+          9.7078
+        ],
+        [
+          4.0555,
+          9.709
+        ]
+      ],
+      "center_lat": 4.0515,
+      "center_lon": 9.7048
+    },
+    "bassa": {
+      "label": "Bassa",
+      "zone": "Zone Industrielle",
+      "congestion": 100.0,
+      "speed_kmh": 5.0,
+      "vehicle_count": 476,
+      "status": "SATURÉ",
+      "color": "#ef4444",
+      "coords": [
+        [
+          4.0234,
+          9.7412
+        ],
+        [
+          4.025,
+          9.743
+        ],
+        [
+          4.0265,
+          9.745
+        ],
+        [
+          4.028,
+          9.7465
+        ],
+        [
+          4.0295,
+          9.748
+        ],
+        [
+          4.031,
+          9.749
+        ]
+      ],
+      "center_lat": 4.0265,
+      "center_lon": 9.745
+    },
+    "bonaberi": {
+      "label": "Bonabéri",
+      "zone": "Pont sur le Wouri",
+      "congestion": 100.0,
+      "speed_kmh": 5.0,
+      "vehicle_count": 476,
+      "status": "SATURÉ",
+      "color": "#ef4444",
+      "coords": [
+        [
+          4.0731,
+          9.6821
+        ],
+        [
+          4.072,
+          9.685
+        ],
+        [
+          4.071,
+          9.688
+        ],
+        [
+          4.0695,
+          9.691
+        ],
+        [
+          4.068,
+          9.694
+        ],
+        [
+          4.066,
+          9.696
+        ]
+      ],
+      "center_lat": 4.0695,
+      "center_lon": 9.694
+    },
+    "logbessou": {
+      "label": "Logbessou",
+      "zone": "Périphérie Nord",
+      "congestion": 100.0,
+      "speed_kmh": 5.0,
+      "vehicle_count": 476,
+      "status": "SATURÉ",
+      "color": "#ef4444",
+      "coords": [
+        [
+          4.1021,
+          9.7156
+        ],
+        [
+          4.1005,
+          9.717
+        ],
+        [
+          4.099,
+          9.7185
+        ],
+        [
+          4.0975,
+          9.7198
+        ],
+        [
+          4.096,
+          9.7212
+        ],
+        [
+          4.0945,
+          9.7225
+        ]
+      ],
+      "center_lat": 4.0975,
+      "center_lon": 9.7198
+    },
+    "makepe": {
+      "label": "Makepe",
+      "zone": "Zone Résidentielle Nord",
+      "congestion": 100.0,
+      "speed_kmh": 5.0,
+      "vehicle_count": 476,
+      "status": "SATURÉ",
+      "color": "#ef4444",
+      "coords": [
+        [
+          4.0812,
+          9.7234
+        ],
+        [
+          4.0825,
+          9.725
+        ],
+        [
+          4.0838,
+          9.7265
+        ],
+        [
+          4.085,
+          9.728
+        ],
+        [
+          4.0862,
+          9.7295
+        ],
+        [
+          4.0875,
+          9.7305
+        ]
+      ],
+      "center_lat": 4.0838,
+      "center_lon": 9.7265
+    },
+    "ndokoti": {
+      "label": "Ndokoti",
+      "zone": "Carrefour Central",
+      "congestion": 100.0,
+      "speed_kmh": 5.0,
+      "vehicle_count": 476,
+      "status": "SATURÉ",
+      "color": "#ef4444",
+      "coords": [
+        [
+          4.0511,
+          9.7085
+        ],
+        [
+          4.053,
+          9.7095
+        ],
+        [
+          4.055,
+          9.71
+        ],
+        [
+          4.057,
+          9.711
+        ],
+        [
+          4.059,
+          9.7105
+        ],
+        [
+          4.061,
+          9.7095
+        ]
+      ],
+      "center_lat": 4.055,
+      "center_lon": 9.71
+    }
+  }
+}

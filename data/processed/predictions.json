@@ -1,0 +1,128 @@
+{
+  "generated_at": "2026-05-06T17:25:52.727817",
+  "horizons": {
+    "+1h": {
+      "label": "Dans 1h (18:25)",
+      "axes": {
+        "ndokoti": {
+          "label": "Ndokoti",
+          "congestion": 100.0,
+          "status": "SATURÉ",
+          "color": "#ef4444"
+        },
+        "bonaberi": {
+          "label": "Bonabéri",
+          "congestion": 100.0,
+          "status": "SATURÉ",
+          "color": "#ef4444"
+        },
+        "bassa": {
+          "label": "Bassa",
+          "congestion": 100.0,
+          "status": "SATURÉ",
+          "color": "#ef4444"
+        },
+        "akwa": {
+          "label": "Akwa",
+          "congestion": 100.0,
+          "status": "SATURÉ",
+          "color": "#ef4444"
+        },
+        "makepe": {
+          "label": "Makepe",
+          "congestion": 100.0,
+          "status": "SATURÉ",
+          "color": "#ef4444"
+        },
+        "logbessou": {
+          "label": "Logbessou",
+          "congestion": 100.0,
+          "status": "SATURÉ",
+          "color": "#ef4444"
+        }
+      }
+    },
+    "+2h": {
+      "label": "Dans 2h (19:25)",
+      "axes": {
+        "ndokoti": {
+          "label": "Ndokoti",
+          "congestion": 100.0,
+          "status": "SATURÉ",
+          "color": "#ef4444"
+        },
+        "bonaberi": {
+          "label": "Bonabéri",
+          "congestion": 100.0,
+          "status": "SATURÉ",
+          "color": "#ef4444"
+        },
+        "bassa": {
+          "label": "Bassa",
+          "congestion": 100.0,
+          "status": "SATURÉ",
+          "color": "#ef4444"
+        },
+        "akwa": {
+          "label": "Akwa",
+          "congestion": 100.0,
+          "status": "SATURÉ",
+          "color": "#ef4444"
+        },
+        "makepe": {
+          "label": "Makepe",
+          "congestion": 100.0,
+          "status": "SATURÉ",
+          "color": "#ef4444"
+        },
+        "logbessou": {
+          "label": "Logbessou",
+          "congestion": 100.0,
+          "status": "SATURÉ",
+          "color": "#ef4444"
+        }
+      }
+    },
+    "+3h": {
+      "label": "Dans 3h (20:25)",
+      "axes": {
+        "ndokoti": {
+          "label": "Ndokoti",
+          "congestion": 100.0,
+          "status": "SATURÉ",
+          "color": "#ef4444"
+        },
+        "bonaberi": {
+          "label": "Bonabéri",
+          "congestion": 100.0,
+          "status": "SATURÉ",
+          "color": "#ef4444"
+        },
+        "bassa": {
+          "label": "Bassa",
+          "congestion": 100.0,
+          "status": "SATURÉ",
+          "color": "#ef4444"
+        },
+        "akwa": {
+          "label": "Akwa",
+          "congestion": 100.0,
+          "status": "SATURÉ",
+          "color": "#ef4444"
+        },
+        "makepe": {
+          "label": "Makepe",
+          "congestion": 100.0,
+          "status": "SATURÉ",
+          "color": "#ef4444"
+        },
+        "logbessou": {
+          "label": "Logbessou",
+          "congestion": 100.0,
+          "status": "SATURÉ",
+          "color": "#ef4444"
+        }
+      }
+    }
+  }
+}

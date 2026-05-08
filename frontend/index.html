@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DoualaFlow — Surveillance du trafic routier de Douala en temps réel. Analyse Big Data, prédictions ML, carte interactive.">
+  <title>DoualaFlow · Trafic en Direct</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗺</text></svg>">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="anonymous">
+  <!-- Notre CSS -->
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ================================================================
+       HEADER — Barre de navigation style Apple/Google Maps
+       ================================================================ -->
+  <header class="app-header" id="app-header">
+
+    <!-- Gauche : Logo -->
+    <div class="header-brand">
+      <div class="brand-icon">🗺</div>
+      <div>
+        <div class="brand-text-main">DoualaFlow</div>
+        <div class="brand-text-sub">Trafic · Douala, Cameroun</div>
+      </div>
+    </div>
+
+    <!-- Centre : Métriques pill style Google Maps -->
+    <div class="header-metrics">
+      <div class="hdr-pill">
+        <div class="hdr-pill-dot" id="hdr-cong-dot" style="background:#34c759"></div>
+        <span>Congestion</span>
+        <span class="hdr-pill-value" id="hdr-congestion">—%</span>
+      </div>
+      <div class="hdr-pill">
+        <div class="hdr-pill-dot" style="background:#007aff"></div>
+        <span>Vitesse moy.</span>
+        <span class="hdr-pill-value" id="hdr-speed">— km/h</span>
+      </div>
+      <div class="hdr-pill">
+        <div class="hdr-pill-dot" style="background:#ff3b30"></div>
+        <span>Axe critique</span>
+        <span class="hdr-pill-value" id="hdr-worst" style="font-size:11px">—</span>
+      </div>
+      <div class="hdr-pill">
+        <div class="hdr-pill-dot" style="background:#34c759"></div>
+        <span>Axe fluide</span>
+        <span class="hdr-pill-value" id="hdr-best" style="font-size:11px">—</span>
+      </div>
+    </div>
+
+    <!-- Droite : Live + horloge -->
+    <div class="header-right">
+      <div class="live-chip">
+        <div class="live-dot"></div>
+        EN DIRECT
+      </div>
+      <div class="clock-display" id="clock">--:--:--</div>
+    </div>
+  </header>
+
+  <!-- Bandeau d'alerte (masqué par défaut) -->
+  <div class="alert-strip" id="alert-strip">
+    <div class="alert-dot"></div>
+    <span id="alert-text">Alerte trafic</span>
+  </div>
+
+  <!-- ================================================================
+       GRILLE PRINCIPALE : Sidebar | Carte + Graphique
+       ================================================================ -->
+  <div class="main-grid">
+
+    <!-- ============================================================
+         SIDEBAR
+         ============================================================ -->
+    <aside class="sidebar" id="sidebar">
+
+      <!-- VUE GLOBALE — KPI Cards -->
+      <div class="sidebar-block">
+        <div class="block-title">Vue Globale</div>
+        <div class="kpi-row">
+          <div class="kpi-card">
+            <span class="kpi-icon">🚦</span>
+            <div class="kpi-num" id="kpi-max-cong" style="color:#ff3b30">—</div>
+            <div class="kpi-lbl">Congestion max</div>
+            <div class="kpi-badge" id="kpi-max-delta">—</div>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-icon">⚡</span>
+            <div class="kpi-num" id="kpi-avg-speed" style="color:#007aff">—</div>
+            <div class="kpi-lbl">km/h moyen</div>
+            <div class="kpi-badge" id="kpi-speed-badge">—</div>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-icon">🛣</span>
+            <div class="kpi-num" style="color:#ffcc00">6</div>
+            <div class="kpi-lbl">Axes surveillés</div>
+            <div class="kpi-badge">— stable</div>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-icon">🚗</span>
+            <div class="kpi-num" id="kpi-vehicles" style="color:#34c759">—</div>
+            <div class="kpi-lbl">Véhicules actifs</div>
+            <div class="kpi-badge" id="kpi-veh-badge">en circulation</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AXES EN TEMPS RÉEL -->
+      <div class="sidebar-block">
+        <div class="block-title">Axes en Temps Réel</div>
+
+        <!-- Filtres chips -->
+        <div class="chip-tabs">
+          <button class="chip active" id="chip-tous"
+                  onclick="DoualaFlow.filterAxes(this,'tous')">Tous</button>
+          <button class="chip" id="chip-sature"
+                  onclick="DoualaFlow.filterAxes(this,'SATURÉ')">Saturés</button>
+          <button class="chip" id="chip-fluide"
+                  onclick="DoualaFlow.filterAxes(this,'FLUIDE')">Fluides</button>
+        </div>
+
+        <!-- Liste dynamique des axes -->
+        <div id="axes-list">
+          <div class="loading-state">
+            <div class="spinner"></div>
+            Connexion au flux trafic...
+          </div>
+        </div>
+      </div>
+
+      <!-- PRÉDICTIONS ML -->
+      <div class="sidebar-block">
+        <div class="block-title">Intelligence Artificielle</div>
+
+        <div class="pred-chips">
+          <button class="pred-chip active" data-horizon="+1h"
+                  onclick="DoualaFlow.showPredHorizon(this,'+1h')">+1h</button>
+          <button class="pred-chip" data-horizon="+2h"
+                  onclick="DoualaFlow.showPredHorizon(this,'+2h')">+2h</button>
+          <button class="pred-chip" data-horizon="+3h"
+                  onclick="DoualaFlow.showPredHorizon(this,'+3h')">+3h</button>
+        </div>
+
+        <div id="predictions-content">
+          <div class="loading-state">
+            <div class="spinner"></div>
+            Calcul des prédictions...
+          </div>
+        </div>
+
+        <div style="margin-top:8px;padding:8px 10px;background:rgba(255,149,0,0.06);border-radius:8px;font-size:10px;color:var(--text-secondary);line-height:1.5;">
+          🤖 <strong style="color:var(--text-primary)">Random Forest</strong> — entraîné sur 7 jours · MAE ≈ 3%
+        </div>
+      </div>
+
+      <!-- BIG DATA INFO -->
+      <div class="sidebar-block" style="padding-bottom:18px;">
+        <div class="block-title">Système Big Data</div>
+        <div class="data-info">
+          <div class="data-info-row">
+            <span class="data-info-key">📦 Format</span>
+            <span class="data-info-val" style="color:#007aff">Apache Parquet</span>
+          </div>
+          <div class="data-info-row">
+            <span class="data-info-key">🗂 Partition</span>
+            <span class="data-info-val">date / axe</span>
+          </div>
+          <div class="data-info-row">
+            <span class="data-info-key">📊 Volume</span>
+            <span class="data-info-val">~500 000 lignes</span>
+          </div>
+          <div class="data-info-row">
+            <span class="data-info-key">🔄 Compression</span>
+            <span class="data-info-val" style="color:#34c759">Snappy</span>
+          </div>
+          <div class="data-info-row">
+            <span class="data-info-key">📡 API</span>
+            <span class="data-info-val">Flask · REST</span>
+          </div>
+          <div class="data-info-row">
+            <span class="data-info-key">🔁 Refresh</span>
+            <span class="data-info-val" id="last-update">—</span>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ============================================================
+         ZONE DROITE : Carte + Graphique
+         ============================================================ -->
+    <div class="content-area">
+
+      <!-- Carte Leaflet + overlays -->
+      <div style="position:relative; flex:1; min-height:0;">
+
+        <!-- Carte principale -->
+        <div id="map"></div>
+
+        <!-- Légende — coin bas gauche -->
+        <div class="map-overlay map-legend">
+          <div class="legend-title">Niveau de Congestion</div>
+          <div class="legend-row">
+            <div class="legend-seg" style="background:#ff3b30"></div>
+            <span>Saturé (&gt; 70%)</span>
+          </div>
+          <div class="legend-row">
+            <div class="legend-seg" style="background:#ff9500"></div>
+            <span>Critique (55–70%)</span>
+          </div>
+          <div class="legend-row">
+            <div class="legend-seg" style="background:#ffcc00"></div>
+            <span>Ralenti (40–55%)</span>
+          </div>
+          <div class="legend-row">
+            <div class="legend-seg" style="background:#34c759"></div>
+            <span>Fluide (&lt; 40%)</span>
+          </div>
+        </div>
+
+        <!-- Compteur véhicules — coin haut droit -->
+        <div class="map-overlay vehicle-pill">
+          <div>
+            <div class="vehicle-num" id="vehicle-count">—</div>
+            <div class="vehicle-lbl">Véhicules</div>
+          </div>
+        </div>
+
+        <!-- Bouton recentrer -->
+        <button class="map-overlay map-center-btn"
+                onclick="DoualaMape.resetView()"
+                title="Recentrer la carte">⊕</button>
+
+      </div>
+
+      <!-- Graphique temporel -->
+      <div class="chart-panel">
+        <div class="chart-header">
+          <div class="chart-title">Évolution Congestion — Journée Typique (Lun–Ven)</div>
+          <div class="chart-legend" id="chart-legend"></div>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="chart-canvas"></canvas>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" crossorigin="anonymous"></script>
+<script src="/js/map.js"></script>
+<script src="/js/dashboard.js"></script>
+</body>
+</html>
